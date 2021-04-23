@@ -23,7 +23,7 @@ class AnimatedCircleButton extends AnimatedWidget {
         super(key: key, listenable: animation);
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<TransitionModel>(context, listen: true);
+    final model = Provider.of<TransitionModel>(context);
     return Transform(
       alignment: FractionalOffset.centerLeft,
       transform: Matrix4.identity()

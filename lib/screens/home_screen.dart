@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     animationController
       ..addStatusListener(
         (status) {
-          final model = Provider.of<TransitionModel>(context, listen: true);
+          final model = Provider.of<TransitionModel>(context, listen: false);
           if (status == AnimationStatus.completed) {
             model.swapColors();
             animationController.reset();
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         },
       )
       ..addListener(() {
-        final model = Provider.of<TransitionModel>(context, listen: true);
+        final model = Provider.of<TransitionModel>(context, listen: false);
         if (animationController.value > .5) {
           model.isHalfWay = true;
         } else {
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final model = Provider.of<TransitionModel>(context, listen: true);
+    final model = Provider.of<TransitionModel>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -82,21 +82,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           model.isHalfWay ? model.foreGroundColor : model.backGroundColor,
       body: Stack(
         children: [
-          PageView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            controller: pageController,
-            itemCount: 4,
-            itemBuilder: (context, index) => Center(
-              child: Text(
-                '${index + 1} Page',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  color: index % 2 == 0 ? Palette.mediumBlue : Palette.white,
-                ),
-              ),
-            ),
-          ),
           Container(
             color:
                 model.isHalfWay ? model.foreGroundColor : model.backGroundColor,
@@ -142,8 +127,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         Tween<double>(begin: 0.0, end: -Palette.radius),
                     horizontalAnimation: horizontalAnimation,
                     tween: Tween<double>(begin: Palette.radius, end: 1.0),
-                  )
+                  ),
                 ],
+              ),
+            ),
+          ),
+          IgnorePointer(
+            ignoring: true,
+            child: PageView.builder(
+              // physics: NeverScrollableScrollPhysics(),
+              controller: pageController,
+              itemCount: 4,
+              itemBuilder: (context, index) => Center(
+                child: Text(
+                  '${index + 1} Page',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    color: index % 2 == 0 ? Palette.mediumBlue : Palette.white,
+                  ),
+                ),
               ),
             ),
           ),
