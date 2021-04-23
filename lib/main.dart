@@ -1,5 +1,7 @@
+import 'package:custom_transition_001/model/transition_model.dart';
 import 'package:custom_transition_001/screens/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,13 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => TransitionModel(),
+      child: MaterialApp(
+        title: 'Page Transition',
+        debugShowCheckedModeBanner: false,
+        home: HomeScreen(title: 'Page Transition Demo'),
       ),
-      home: HomeScreen(title: 'Flutter Page Transition Custom Demo'),
     );
   }
 }
