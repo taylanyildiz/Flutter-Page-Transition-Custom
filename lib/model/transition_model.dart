@@ -1,5 +1,5 @@
 import 'package:custom_transition_001/config/palette.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class TransitionModel with ChangeNotifier {
   int _index = 0;
