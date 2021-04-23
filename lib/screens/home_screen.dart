@@ -99,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 if (animationController.status != AnimationStatus.forward) {
                   model.isToggled = !model.isToggled;
                   model.index++;
-
                   if (model.index > 3) {
                     model.index = 0;
                   }
@@ -135,7 +134,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           IgnorePointer(
             ignoring: true,
             child: PageView.builder(
-              // physics: NeverScrollableScrollPhysics(),
               controller: pageController,
               itemCount: 4,
               itemBuilder: (context, index) => Center(
